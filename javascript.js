@@ -27,9 +27,9 @@ function getBookFromInput() {
 function addBookToLibrary(library, book) {
   library.push(book);
 }
-function toggleRead() {
-  this.classList.toggle('btn-is-read');
-  this.classList.toggle('btn-not-read');
+function toggleRead(button) {
+  button.classList.toggle('btn-is-read');
+  button.classList.toggle('btn-not-read');
 }
 
 function displayBook(book) {
@@ -39,10 +39,14 @@ function displayBook(book) {
   const pages = document.createElement('p');
   const readBtn = document.createElement('button');
   const removeBtn = document.createElement('button');
+  title.classList.add('title-text');
   bookCard.classList.add('book-card');
   readBtn.classList.add('read-btn');
   removeBtn.classList.add('remove-btn');
-  readBtn.addEventListener('click', toggleRead);
+  readBtn.addEventListener('click', () => {
+    toggleRead(readBtn);
+    readBtn.textContent = readBtn.classList.contains('btn-is-read') ? 'Read' : 'Not Read';
+  });
   title.textContent = (`"${book.title}"`);
   author.textContent = (`${book.author}`);
   pages.textContent = (`${book.pages} pages`);
